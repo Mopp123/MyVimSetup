@@ -1,0 +1,6 @@
+[submodule "vim-code-dark"]
+	path = vim-code-dark
+	url = git@github.com:tomasiser/vim-code-dark.git
+[submodule "YouCompleteMe"]
+	path = YouCompleteMe
+	url = git@github.com:ycm-core/YouCompleteMe.git

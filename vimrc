@@ -1,9 +1,10 @@
-set runtimepath^=~/.vim/bundle/YouCompleteMe
-set runtimepath^=~/.vim/bundle/vim-code-dark
+set runtimepath^=~/.vim/YouCompleteMe
+set runtimepath^=~/.vim/vim-code-dark
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set nowrap
+filetype plugin indent on
 
 " Specific tab settings for js and html
 function UseSettingsJS()

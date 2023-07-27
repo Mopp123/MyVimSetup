@@ -1,6 +1,7 @@
 # MyVimSetup
+Should be cloned into .vim dir.
 
-Used plugins:
+## Used plugins:
 
 YCM
 https://github.com/ycm-core/YouCompleteMe
