@@ -1,5 +1,7 @@
 set runtimepath^=~/.vim/YouCompleteMe
 set runtimepath^=~/.vim/vim-code-dark
+set runtimepath^=~/.vim/minimap.vim
+
 set softtabstop=4
 set shiftwidth=4
 set expandtab
@@ -12,11 +14,25 @@ function UseSettingsJS()
     setlocal shiftwidth=2
 endfunction
 
+
 " Removes trailing whitespaces
 function TrimWhiteSpace()
   %s/\s*$//
   ''
 endfunction
+
+
+let g:minimap_highlight_search = 1
+function SetupCodeEnv()
+    " Highlight search
+    set hlsearch
+    " When searching word under cursor using '*' -> dont jump immediately
+    colorscheme codedark
+    set number
+endfunction
+
+command CodeEnv call SetupCodeEnv()
+
 
 " REMOVE TRAILING WHITESPACES
 autocmd BufWritePre * try | undojoin | call TrimWhiteSpace() | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
@@ -41,3 +57,6 @@ map! <F2> :call TrimWhiteSpace()<CR>
 " Set specific settings for js and html
 autocmd Filetype js call UseSettingsJS()
 autocmd Filetype html call UseSettingsJS()
+
+" Custom commands
+
