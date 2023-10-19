@@ -1,6 +1,6 @@
 set runtimepath^=~/.vim/YouCompleteMe
 set runtimepath^=~/.vim/vim-code-dark
-set runtimepath^=~/.vim/minimap.vim
+" set runtimepath^=~/.vim/minimap.vim
 
 set softtabstop=4
 set shiftwidth=4
@@ -22,16 +22,16 @@ function TrimWhiteSpace()
 endfunction
 
 
-let g:minimap_highlight_search = 1
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
+" let g:minimap_highlight_search = 1
+" let g:minimap_auto_start = 1
+" let g:minimap_auto_start_win_enter = 1
 function SetupCodeEnv()
     " Highlight search
     set hlsearch
+    nnoremap * *``
     " When searching word under cursor using '*' -> dont jump immediately
     colorscheme codedark
     set number
-    nnoremap <Tab> :MinimapJump <CR>
 endfunction
 
 command CodeEnv call SetupCodeEnv()

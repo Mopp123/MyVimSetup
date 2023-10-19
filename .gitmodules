@@ -4,6 +4,3 @@
 [submodule "YouCompleteMe"]
 	path = YouCompleteMe
 	url = git@github.com:ycm-core/YouCompleteMe.git
-[submodule "minimap.vim"]
-	path = minimap.vim
-	url = git@github.com:Mopp123/minimap.vim.git
