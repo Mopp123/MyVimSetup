@@ -2,6 +2,11 @@ set runtimepath^=~/.vim/YouCompleteMe
 set runtimepath^=~/.vim/vim-code-dark
 " set runtimepath^=~/.vim/minimap.vim
 
+" YCM stopped finding stl lib for some reason..
+" This fixes it
+" https://stackoverflow.com/questions/75971787/youcompleteme-doesnt-find-stl-files
+let g:ycm_clangd_args = [ '--query-driver=/usr/bin/c++' ]"
+
 set softtabstop=4
 set shiftwidth=4
 set expandtab
