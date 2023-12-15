@@ -2,10 +2,17 @@ set runtimepath^=~/.vim/YouCompleteMe
 set runtimepath^=~/.vim/vim-code-dark
 " set runtimepath^=~/.vim/minimap.vim
 
-" YCM stopped finding stl lib for some reason..
-" This fixes it
+" YCM stopped finding stl lib automatically for some reason.. (worked earlier)
+" Following fixes it
 " https://stackoverflow.com/questions/75971787/youcompleteme-doesnt-find-stl-files
-let g:ycm_clangd_args = [ '--query-driver=/usr/bin/c++' ]"
+"
+" NOTE: What this path should be depends on what stl lib to use and where it
+" is located
+"   -> for example if using emscripten this cannot be the one installed with
+"   build-essentials -> it must be the one in emsdk
+
+" let g:ycm_clangd_args = [ '--query-driver=/usr/bin/c++' ]
+let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/client-app/emsdk/upstream/emscripten/em++' ]
 
 set softtabstop=4
 set shiftwidth=4
@@ -30,16 +37,34 @@ endfunction
 " let g:minimap_highlight_search = 1
 " let g:minimap_auto_start = 1
 " let g:minimap_auto_start_win_enter = 1
-function SetupCodeEnv()
+function SetupCodeEnv(...)
     " Highlight search
     set hlsearch
     nnoremap * *``
     " When searching word under cursor using '*' -> dont jump immediately
     colorscheme codedark
     set number
+
+    " Set correct path to compiler for ycm
+    let lang = "default"
+    if len(a:000) > 0
+        let lang = a:1
+    endif
+
+    echo "Language set to: " . lang
+
+    if lang == "c++"
+        let g:ycm_clangd_args = [ '--query-driver=/usr/bin/c++' ]
+    endif
+
+    if lang == "em++"
+        let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/client-app/emsdk/upstream/emscripten/em++' ]
+    endif
+
+    YcmRestartServer
 endfunction
 
-command CodeEnv call SetupCodeEnv()
+command -nargs=* CodeEnv call SetupCodeEnv(<args>)
 
 
 " REMOVE TRAILING WHITESPACES
