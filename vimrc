@@ -55,13 +55,26 @@ function SetupCodeEnv(...)
 
     if lang == "c++"
         let g:ycm_clangd_args = [ '--query-driver=/usr/bin/c++' ]
+        YcmRestartServer
     endif
 
     if lang == "em++"
         let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/client-app/emsdk/upstream/emscripten/em++' ]
+        YcmRestartServer
     endif
 
-    YcmRestartServer
+    if lang == "none"
+        " NOTE: Not sure if this should be set to 1 in the above cases...
+        let g:ycm_auto_trigger = 0
+        let g:ycm_show_diagnostics_ui = 0
+        YcmRestartServer
+        :e
+        " This is that column next to line numbers which ycm puts '>>' on
+        " lines with errors...
+        set signcolumn=no
+        echo "YCM disabled!"
+    endif
+
 endfunction
 
 command -nargs=* CodeEnv call SetupCodeEnv(<args>)
