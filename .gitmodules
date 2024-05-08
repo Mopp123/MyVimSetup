@@ -4,3 +4,6 @@
 [submodule "YouCompleteMe"]
 	path = YouCompleteMe
 	url = git@github.com:ycm-core/YouCompleteMe.git
+[submodule "tagbar"]
+	path = tagbar
+	url = git@github.com:preservim/tagbar.git

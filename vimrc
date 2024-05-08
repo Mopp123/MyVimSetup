@@ -1,5 +1,6 @@
 set runtimepath^=~/.vim/YouCompleteMe
 set runtimepath^=~/.vim/vim-code-dark
+set runtimepath^=~/.vim/tagbar
 " set runtimepath^=~/.vim/minimap.vim
 
 " YCM stopped finding stl lib automatically for some reason.. (worked earlier)
@@ -12,13 +13,15 @@ set runtimepath^=~/.vim/vim-code-dark
 "   build-essentials -> it must be the one in emsdk
 
 " let g:ycm_clangd_args = [ '--query-driver=/usr/bin/c++' ]
-let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/client-app/emsdk/upstream/emscripten/em++' ]
+" let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/client-app/emsdk/upstream/emscripten/em++' ]
 
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set nowrap
 filetype plugin indent on
+" Sort tagbar by position instead of alphabetically by default
+let g:tagbar_sort = 0
 
 " Specific tab settings for js and html
 function UseSettingsJS()
@@ -59,7 +62,7 @@ function SetupCodeEnv(...)
     endif
 
     if lang == "em++"
-        let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/client-app/emsdk/upstream/emscripten/em++' ]
+        let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/emsdk/upstream/emscripten/em++' ]
         YcmRestartServer
     endif
 
