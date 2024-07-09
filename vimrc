@@ -3,6 +3,13 @@ set runtimepath^=~/.vim/vim-code-dark
 set runtimepath^=~/.vim/tagbar
 " set runtimepath^=~/.vim/minimap.vim
 
+" vim hardcodes background color erase even if the terminfo file does
+" not contain bce (not to mention that libvte based terminals
+" incorrectly contain bce in their terminfo files). This causes
+" incorrect background rendering when using a color theme with a
+" background color.
+let &t_ut=''
+
 " YCM stopped finding stl lib automatically for some reason.. (worked earlier)
 " Following fixes it
 " https://stackoverflow.com/questions/75971787/youcompleteme-doesnt-find-stl-files
@@ -109,3 +116,5 @@ autocmd Filetype html call UseSettingsJS()
 
 " Custom commands
 
+" Open tagbar with tab
+map <Tab> :TagbarToggle<CR>
