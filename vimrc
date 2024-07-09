@@ -69,7 +69,7 @@ function SetupCodeEnv(...)
     endif
 
     if lang == "em++"
-        let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/emsdk/upstream/emscripten/em++' ]
+        let g:ycm_clangd_args = [ '--query-driver=/home/mbp666/Documents/projects/emsdk/upstream/emscripten/em++' ]
         YcmRestartServer
     endif
 
@@ -87,8 +87,62 @@ function SetupCodeEnv(...)
 
 endfunction
 
-command -nargs=* CodeEnv call SetupCodeEnv(<args>)
+" Rename tabs to show tab number.
+" (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
+if exists("+showtabline")
+    function! MyTabLine()
+        let s = ''
+        let wn = ''
+        let t = tabpagenr()
+        let i = 1
+        while i <= tabpagenr('$')
+            let buflist = tabpagebuflist(i)
+            let winnr = tabpagewinnr(i)
+            let s .= '%' . i . 'T'
+            let s .= (i == t ? '%1*' : '%2*')
+            let s .= ' '
+            let wn = tabpagewinnr(i,'$')
 
+            let s .= '%#TabNum#'
+            let s .= i
+            " let s .= '%*'
+            let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+            let bufnr = buflist[winnr - 1]
+            let file = bufname(bufnr)
+            let buftype = getbufvar(bufnr, 'buftype')
+            if buftype == 'nofile'
+                if file =~ '\/.'
+                    let file = substitute(file, '.*\/\ze.', '', '')
+                endif
+            else
+                let file = fnamemodify(file, ':p:t')
+            endif
+            if file == ''
+                let file = '[No Name]'
+            endif
+            let s .= ' ' . file . ' '
+            let i = i + 1
+        endwhile
+        let s .= '%T%#TabLineFill#%='
+        let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+        return s
+    endfunction
+    set stal=2
+    set tabline=%!MyTabLine()
+    set showtabline=1
+    highlight link TabNum Special
+endif
+
+" To unfuck using with tmux
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
+command -nargs=* CodeEnv call SetupCodeEnv(<args>)
 
 " REMOVE TRAILING WHITESPACES
 autocmd BufWritePre * try | undojoin | call TrimWhiteSpace() | catch /^Vim\%((\a\+)\)\=:E790/ | endtry
@@ -98,12 +152,6 @@ autocmd BufWritePre * try | undojoin | call TrimWhiteSpace() | catch /^Vim\%((\a
 
 " Display trailing whitespaces
 "set list listchars=trail:.,extends:>
-
-" *Old whitespace removal
-"autocmd FileWritePre * call TrimWhiteSpace()
-"autocmd FileAppendPre * call TrimWhiteSpace()
-"autocmd FilterWritePre * call TrimWhiteSpace()
-"autocmd BufWritePre * call TrimWhiteSpace()
 
 map <F2> :call TrimWhiteSpace()<CR>
 map! <F2> :call TrimWhiteSpace()<CR>
