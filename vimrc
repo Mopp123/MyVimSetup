@@ -1,6 +1,7 @@
 set runtimepath^=~/.vim/YouCompleteMe
 set runtimepath^=~/.vim/vim-code-dark
 set runtimepath^=~/.vim/tagbar
+set runtimepath^=~/.vim/vim-polyglot
 
 " vim hardcodes background color erase even if the terminfo file does
 " not contain bce (not to mention that libvte based terminals

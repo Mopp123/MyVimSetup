@@ -7,3 +7,6 @@
 [submodule "tagbar"]
 	path = tagbar
 	url = git@github.com:preservim/tagbar.git
+[submodule "vim-polyglot"]
+	path = vim-polyglot
+	url = git@github.com:sheerun/vim-polyglot.git
