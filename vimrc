@@ -1,6 +1,7 @@
 set runtimepath^=~/.vim/YouCompleteMe
 set runtimepath^=~/.vim/vim-code-dark
 set runtimepath^=~/.vim/tagbar
+set runtimepath^=~/.vim/vim-glsl
 " set runtimepath^=~/.vim/minimap.vim
 
 " vim hardcodes background color erase even if the terminfo file does
@@ -69,7 +70,9 @@ function SetupCodeEnv(...)
     endif
 
     if lang == "em++"
-        let g:ycm_clangd_args = [ '--query-driver=/home/mbp666/Documents/projects/emsdk/upstream/emscripten/em++' ]
+        " NOT SURE IF BELOW WORKS -> test that!
+        " let g:ycm_clangd_args = [ '--query-driver=/home/mbp666/Documents/projects/emsdk/upstream/emscripten/em++' ]
+        let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/emsdk/upstream/emscripten/em++' ]
         YcmRestartServer
     endif
 
