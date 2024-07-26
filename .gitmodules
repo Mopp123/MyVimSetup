@@ -7,6 +7,3 @@
 [submodule "tagbar"]
 	path = tagbar
 	url = git@github.com:preservim/tagbar.git
-[submodule "vim-glsl"]
-	path = vim-glsl
-	url = git@github.com:tikhomirov/vim-glsl.git
