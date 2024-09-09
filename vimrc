@@ -23,6 +23,7 @@ let &t_ut=''
 " let g:ycm_clangd_args = [ '--query-driver=/home/kalle/Documents/projects/client-app/emsdk/upstream/emscripten/em++' ]
 
 set softtabstop=4
+set tabstop=4
 set shiftwidth=4
 set expandtab
 set nowrap
